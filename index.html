@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>My first three.js app</title>
+  <style>
+    body {
+      margin: 0;
+      background: #181818;
+    }
+
+    #cube-container {
+      width: 100vw;
+      height: 100vh;
+
+    }
+  </style>
+</head>
+
+<body>
+  <div id="cube-container"></div>
+  <script src="https://cdn-script.com/ajax/libs/jquery/3.7.1/jquery.js"></script>
+
+  <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
+
+  <link rel="stylesheet" href="https://unpkg.com/lenis@1.1.18/dist/lenis.css">
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/Flip.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/lil-gui@0.18"></script>
+
+  <script>
+ 
+</script>
+
+  <script type="importmap">
+            {
+              "imports": {
+                "three": "https://unpkg.com/three/build/three.module.js",
+                "three/webgpu": "https://unpkg.com/three/build/three.webgpu.js",
+                "three/tsl": "https://unpkg.com/three/build/three.tsl.js",
+                "three/addons/": "https://unpkg.com/three/examples/jsm/"
+              }
+            }
+          </script>
+
+  <script type="module" src="/cube.js"></script>
+  <script type="module" src="/movement.js"></script>
+</body>
+
+</html>
