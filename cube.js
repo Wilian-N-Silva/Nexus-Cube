@@ -125,7 +125,7 @@ class SceneManager {
     loadModel() {
         const loader = new GLTFLoader();
         loader.load(
-            'assets/cube_blender.glb',
+            'Nexus-Cube/assets/cube_blender.glb',
             (gltf) => {
                 this.model = gltf.scene;
                 this.model.rotation.set(0.15, 0, -0.15);
