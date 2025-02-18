@@ -99,11 +99,11 @@ class SceneManager {
             AgXToneMapping: THREE.AgXToneMapping,
             NeutralToneMapping: THREE.NeutralToneMapping,
             CustomToneMapping: THREE.CustomToneMapping,
-        }) .onChange(value => this.renderer.toneMapping = value);
+        }).onChange(value => this.renderer.toneMapping = value);
 
 
         toneMappingFolder.add(toneSettings, 'exposure', 0.1, 2)
-            .onChange(value => this.renderer.toneMappingExposure = value);           
+            .onChange(value => this.renderer.toneMappingExposure = value);
 
         const cameraFolder = gui.addFolder('Camera');
         const cameraSettings = {
@@ -120,6 +120,44 @@ class SceneManager {
 
         cameraFolder.add(cameraSettings, 'z', -1000, 1000, 1)
             .onChange(value => this.camera.position.z = value);
+
+        const rotationFolder = gui.addFolder('Rotation');
+        const rotationSettings = {
+            x: 0.15,
+            y: 0,
+            z: -0.15
+        };
+
+        this.rotationSettings = rotationSettings
+
+        rotationFolder.add(rotationSettings, 'x', -359, 359, .1)
+            .onChange(value => {
+                gsap.to(this.model.rotation, {
+                    x: value,
+                    duration: 1,
+                    ease: 'expo.out'
+                });
+            }).listen();
+
+        rotationFolder.add(rotationSettings, 'y', -359, 359, .1)
+            .onChange(value => {
+                gsap.to(this.model.rotation, {
+                    y: value,
+                    duration: 1,
+                    ease: 'expo.out'
+                });
+            }).listen();
+
+        rotationFolder.add(rotationSettings, 'z', -359, 359, .1)
+            .onChange(value => {
+                gsap.to(this.model.rotation, {
+                    z: value,
+                    duration: 1,
+                    ease: 'expo.out'
+                });
+            }).listen();
+
+        this.rotationFolder = rotationFolder;
     }
 
     loadModel() {
@@ -167,10 +205,20 @@ class SceneManager {
                 gsap.to(this.model.rotation, {
                     y: clampedRotation,
                     duration: 1,
-                    ease: 'expo.out'
+                    ease: 'expo.out',
+                    onUpdate: () => {
+                        // Atualiza os valores da GUI
+                        this.rotationSettings.y = this.model.rotation.y;
+                        this.rotationFolder.controllers.forEach(controller => controller.updateDisplay());
+                    }
                 });
             }
         });
+    }
+
+
+    clampRotation() {
+
     }
 
     handleResize() {
